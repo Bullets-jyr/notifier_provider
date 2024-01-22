@@ -21,39 +21,83 @@ class _EnumActivityPageState extends ConsumerState<EnumActivityPage> {
   void initState() {
     super.initState();
     // API 호출
-    ref.read(enumActivityProvider.notifier).fetchActivity(activityTypes[0]);
+    // ref.read(enumActivityProvider.notifier).fetchActivity(activityTypes[0]);
+    Future.delayed(Duration.zero, () {
+      ref.read(enumActivityProvider.notifier).fetchActivity(activityTypes[0]);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<EnumActivityState>(
+      enumActivityProvider,
+      (previous, next) {
+        if (next.status == ActivityStatus.failure) {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                content: Text(next.error),
+              );
+            },
+          );
+        }
+      },
+    );
+
     final activityState = ref.watch(enumActivityProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('EnumActivityNotifier'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              ref.read(myCounterProvider.notifier).increment();
+            },
+            icon: const Icon(Icons.add),
+          ),
+          IconButton(
+            onPressed: () {
+              ref.invalidate(enumActivityProvider);
+            },
+            icon: const Icon(Icons.refresh),
+          ),
+        ],
       ),
       body: switch (activityState.status) {
         ActivityStatus.initial => const Center(
-          child: Text(
-            'Get some activity',
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-        ActivityStatus.loading => const Center(
-          child: CircularProgressIndicator(),
-        ),
-        ActivityStatus.failure => Center(
-          child: Text(
-            activityState.error,
-            style: const TextStyle(
-              fontSize: 20,
-              color: Colors.red,
+            child: Text(
+              'Get some activity',
+              style: TextStyle(fontSize: 20),
             ),
           ),
-        ),
+        ActivityStatus.loading => const Center(
+            child: CircularProgressIndicator(),
+          ),
+        // ActivityStatus.failure => Center(
+        //   child: Text(
+        //     activityState.error,
+        //     style: const TextStyle(
+        //       fontSize: 20,
+        //       color: Colors.red,
+        //     ),
+        //   ),
+        // ),
+        ActivityStatus.failure => activityState.activity == Activity.empty()
+            ? const Center(
+                child: Text(
+                  'Get some activity',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.red,
+                  ),
+                ),
+              )
+            : ActivityWidget(activity: activityState.activity),
         ActivityStatus.success => ActivityWidget(
-          activity: activityState.activity,
-        ),
+            activity: activityState.activity,
+          ),
       },
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -73,6 +117,7 @@ class _EnumActivityPageState extends ConsumerState<EnumActivityPage> {
 
 class ActivityWidget extends StatelessWidget {
   final Activity activity;
+
   const ActivityWidget({
     Key? key,
     required this.activity,
