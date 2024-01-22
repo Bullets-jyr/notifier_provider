@@ -5,6 +5,7 @@ import 'pages/counter/counter_page.dart';
 import 'pages/enum_activity/enum_activity_page.dart';
 import 'pages/enum_async_activity/enum_async_activity_page.dart';
 import 'pages/sealed_activity/sealed_activity_page.dart';
+import 'pages/sealed_async_activity/sealed_async_activity_page.dart';
 import 'widgets/custom_button.dart';
 
 void main() {
@@ -61,6 +62,10 @@ class MyHomePage extends StatelessWidget {
             CustomButton(
               title: 'Enum Async Activity',
               child: EnumAsyncActivityPage(),
+            ),
+            CustomButton(
+              title: 'Sealed Async Activity',
+              child: SealedAsyncActivityPage(),
             ),
           ],
         ),
