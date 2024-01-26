@@ -21,6 +21,7 @@ class EnumAsyncActivity extends _$EnumAsyncActivity {
   int _errorCounter = 0;
 
   EnumAsyncActivity() {
+    // Exception
     // state = EnumAsyncActivityState.initial();
     print('[EnumAsyncActivity] constructor called');
   }

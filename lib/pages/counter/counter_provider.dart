@@ -9,16 +9,20 @@ part 'counter_provider.g.dart';
 // class Counter extends FamilyNotifier<int, int> {
 // class Counter extends AutoDisposeFamilyNotifier<int, int> {
 //   // int publicVar = 0; (불가능)
+//   // private 변수 선언은 가능
 //   // int _publicVar = 0; (가능)
 //   @override
+//   int arg: 추가 파라미터
 //   int build(int arg) {
 //     ref.onDispose(() {
 //       print('[counterProvider] disposed');
 //     });
+//     // Counter의 initial state
 //     // return 0;
 //     return arg;
 //   }
 //
+//   business logic
 //   void increment() {
 //     state++;
 //   }
@@ -28,7 +32,9 @@ part 'counter_provider.g.dart';
 //   return Counter();
 // });
 
-// constructor tear-offs
+// constructor도 일종의 function
+// constructor tear-offs: Notifier 인스턴스만을 리턴한다면...?
+// Counter.new: 혼란 방지
 // final counterProvider = NotifierProvider<Counter, int>(Counter.new);
 
 // autoDispose: AutoDisposeNotifier

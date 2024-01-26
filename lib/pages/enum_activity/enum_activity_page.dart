@@ -53,12 +53,14 @@ class _EnumActivityPageState extends ConsumerState<EnumActivityPage> {
         actions: [
           IconButton(
             onPressed: () {
+              // Notifier의 build function은 다시 실행이 되었지만 dispose 되지않습니다.
               ref.read(myCounterProvider.notifier).increment();
             },
             icon: const Icon(Icons.add),
           ),
           IconButton(
             onPressed: () {
+              // Notifier의 build function은 다시 실행이 되었지만 dispose 되지않습니다.
               ref.invalidate(enumActivityProvider);
             },
             icon: const Icon(Icons.refresh),
