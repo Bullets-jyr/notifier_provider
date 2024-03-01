@@ -53,14 +53,14 @@ class _EnumActivityPageState extends ConsumerState<EnumActivityPage> {
         actions: [
           IconButton(
             onPressed: () {
-              // Notifier의 build function은 다시 실행이 되었지만 dispose 되지않습니다.
+              // Notifier의 build function은 다시 실행이 되었지만 Notifier는 dispose 되지않습니다.
               ref.read(myCounterProvider.notifier).increment();
             },
             icon: const Icon(Icons.add),
           ),
           IconButton(
             onPressed: () {
-              // Notifier의 build function은 다시 실행이 되었지만 dispose 되지않습니다.
+              // Notifier의 build function은 다시 실행이 되었지만 Notifier는 dispose 되지않습니다.
               ref.invalidate(enumActivityProvider);
             },
             icon: const Icon(Icons.refresh),
@@ -96,6 +96,7 @@ class _EnumActivityPageState extends ConsumerState<EnumActivityPage> {
                   ),
                 ),
               )
+            // 이전 엑티비티 데이터를 성공적으로 불러온 적이 있으면 엑티비티 위젯을 표시합니다.
             : ActivityWidget(activity: activityState.activity),
         ActivityStatus.success => ActivityWidget(
             activity: activityState.activity,
@@ -104,9 +105,7 @@ class _EnumActivityPageState extends ConsumerState<EnumActivityPage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           final randomNumber = Random().nextInt(activityTypes.length);
-          ref
-              .read(enumActivityProvider.notifier)
-              .fetchActivity(activityTypes[randomNumber]);
+          ref.read(enumActivityProvider.notifier).fetchActivity(activityTypes[randomNumber]);
         },
         label: Text(
           'New Activity',

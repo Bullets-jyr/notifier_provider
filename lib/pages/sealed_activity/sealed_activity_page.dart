@@ -31,7 +31,10 @@ class _SealedActivityPageState extends ConsumerState<SealedActivityPage> {
     ref.listen<SealedActivityState>(
       sealedActivityProvider,
       (previous, next) {
+        // break를 처리하지 않아도 됩니다.
+        // enhanced switch statement + pattern matching
         switch (next) {
+          // 맞으면 SealedActivityFailure의 error property의 값을 String error에 저장합니다.
           case SealedActivityFailure(error: String error):
             showDialog(
               context: context,
@@ -70,6 +73,7 @@ class _SealedActivityPageState extends ConsumerState<SealedActivityPage> {
         SealedActivityLoading() => const Center(
             child: CircularProgressIndicator(),
           ),
+        // error property의 값을 사용하지 않을거라서...
         SealedActivityFailure() => prevWidget == null
             ? const Center(
                 child: Text(
@@ -89,9 +93,7 @@ class _SealedActivityPageState extends ConsumerState<SealedActivityPage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           final randomNumber = Random().nextInt(activityTypes.length);
-          ref
-              .read(sealedActivityProvider.notifier)
-              .fetchActivity(activityTypes[randomNumber]);
+          ref.read(sealedActivityProvider.notifier).fetchActivity(activityTypes[randomNumber]);
         },
         label: Text(
           'New Activity',

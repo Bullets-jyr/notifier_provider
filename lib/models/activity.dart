@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 part 'activity.freezed.dart';
 part 'activity.g.dart';
 
+// Remote API Data Model
 @freezed
 class Activity with _$Activity {
   const factory Activity({
@@ -17,6 +18,7 @@ class Activity with _$Activity {
 
   factory Activity.fromJson(Map<String, dynamic> json) => _$ActivityFromJson(json);
 
+  // 초기 state 설정
   factory Activity.empty() => const Activity(
     activity: '',
     accessibility: 0.0,

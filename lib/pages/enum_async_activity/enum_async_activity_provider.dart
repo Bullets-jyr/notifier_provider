@@ -34,6 +34,7 @@ class EnumAsyncActivity extends _$EnumAsyncActivity {
     });
     ref.watch(myCounterProvider);
     print('hashCode: $hashCode');
+    // Exception
     state = EnumAsyncActivityState.initial();
     // state = EnumAsyncActivityState(
     //   status: ActivityStatus.failure,
@@ -41,7 +42,7 @@ class EnumAsyncActivity extends _$EnumAsyncActivity {
     //   error: 'Initial Failure',
     // );
     fetchActivity(activityTypes[0]);
-    // 외부에 노출되는 최초의 state
+    // Provider가 외부에 노출되는 최초의 state는 build()에서 return한 값입니다.
     return EnumAsyncActivityState.initial();
   }
 

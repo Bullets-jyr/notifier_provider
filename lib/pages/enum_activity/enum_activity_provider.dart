@@ -20,6 +20,7 @@ class MyCounter extends _$MyCounter {
 class EnumActivity extends _$EnumActivity {
   int _errorCounter = 0;
 
+  // Notifier의 build 메소드는 다시 실행이 되지만 Notifier는 dispose되지 않습니다.
   @override
   EnumActivityState build() {
     ref.onDispose(() {

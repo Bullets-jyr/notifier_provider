@@ -72,9 +72,7 @@ class EnumAsyncActivityPage extends ConsumerWidget {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           final randomNumber = Random().nextInt(activityTypes.length);
-          ref
-              .read(enumAsyncActivityProvider.notifier)
-              .fetchActivity(activityTypes[randomNumber]);
+          ref.read(enumAsyncActivityProvider.notifier).fetchActivity(activityTypes[randomNumber]);
         },
         label: Text(
           'New Activity',

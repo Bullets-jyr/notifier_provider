@@ -20,6 +20,7 @@ final class SealedActivityLoading extends SealedActivityState {
 
 final class SealedActivitySuccess extends SealedActivityState {
   final Activity activity;
+
   const SealedActivitySuccess({
     required this.activity,
   });
@@ -30,6 +31,7 @@ final class SealedActivitySuccess extends SealedActivityState {
 
 final class SealedActivityFailure extends SealedActivityState {
   final String error;
+
   const SealedActivityFailure({
     required this.error,
   });
