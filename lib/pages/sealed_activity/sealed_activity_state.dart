@@ -1,5 +1,6 @@
 import '../../models/activity.dart';
 
+// 암묵적으로 abstract
 sealed class SealedActivityState {
   const SealedActivityState();
 }
