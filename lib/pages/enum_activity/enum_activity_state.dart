@@ -17,14 +17,14 @@ enum ActivityStatus {
 class EnumActivityState with _$EnumActivityState {
   const factory EnumActivityState({
     required ActivityStatus status,
-    required Activity activity,
+    required List<Activity> activities,
     required String error,
   }) = _EnumActivityState;
 
   factory EnumActivityState.initial() {
     return EnumActivityState(
       status: ActivityStatus.initial,
-      activity: Activity.empty(),
+      activities: [Activity.empty()],
       error: '',
     );
   }

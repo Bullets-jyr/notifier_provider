@@ -20,7 +20,7 @@ final myCounterProvider = AutoDisposeNotifierProvider<MyCounter, int>.internal(
 );
 
 typedef _$MyCounter = AutoDisposeNotifier<int>;
-String _$enumAsyncActivityHash() => r'cac9af29e2d3e7a396d1b0746a1312832969867d';
+String _$enumAsyncActivityHash() => r'9cb0cc9811f6ae9cdf7fb9c19896446183b35f29';
 
 /// See also [EnumAsyncActivity].
 @ProviderFor(EnumAsyncActivity)

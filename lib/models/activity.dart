@@ -9,10 +9,14 @@ part 'activity.g.dart';
 class Activity with _$Activity {
   const factory Activity({
     required String activity,
-    required double accessibility,
+    required double availability,
     required String type,
     required int participants,
     required double price,
+    required String accessibility,
+    required String duration,
+    required bool kidFriendly,
+    required String link,
     required String key,
   }) = _Activity;
 
@@ -21,10 +25,14 @@ class Activity with _$Activity {
   // 초기 state 설정
   factory Activity.empty() => const Activity(
     activity: '',
-    accessibility: 0.0,
+    availability: 0.0,
     type: '',
     participants: 0,
     price: 0.0,
+    accessibility: '',
+    duration: '',
+    kidFriendly: false,
+    link: '',
     key: '',
   );
 }
@@ -33,10 +41,8 @@ final activityTypes = [
   "education",
   "recreational",
   "social",
-  "diy",
   "charity",
   "cooking",
   "relaxation",
-  "music",
   "busywork"
 ];

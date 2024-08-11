@@ -54,7 +54,7 @@ class EnumAsyncActivityPage extends ConsumerWidget {
         ActivityStatus.loading => const Center(
           child: CircularProgressIndicator(),
         ),
-        ActivityStatus.failure => activityState.activity == Activity.empty()
+        ActivityStatus.failure => activityState.activities.first == Activity.empty()
             ? const Center(
           child: Text(
             'Get some activity',
@@ -64,9 +64,9 @@ class EnumAsyncActivityPage extends ConsumerWidget {
             ),
           ),
         )
-            : ActivityWidget(activity: activityState.activity),
+            : ActivityWidget(activity: activityState.activities.first),
         ActivityStatus.success => ActivityWidget(
-          activity: activityState.activity,
+          activity: activityState.activities.first,
         ),
       },
       floatingActionButton: FloatingActionButton.extended(

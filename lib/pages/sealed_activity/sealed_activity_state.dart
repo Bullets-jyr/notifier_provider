@@ -20,14 +20,14 @@ final class SealedActivityLoading extends SealedActivityState {
 }
 
 final class SealedActivitySuccess extends SealedActivityState {
-  final Activity activity;
+  final List<Activity> activities;
 
   const SealedActivitySuccess({
-    required this.activity,
+    required this.activities,
   });
 
   @override
-  String toString() => 'SealedActivitySuccess(activity: $activity)';
+  String toString() => 'SealedActivitySuccess(activity: $activities)';
 }
 
 final class SealedActivityFailure extends SealedActivityState {

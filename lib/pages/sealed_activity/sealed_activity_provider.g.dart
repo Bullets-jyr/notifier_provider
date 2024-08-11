@@ -6,7 +6,7 @@ part of 'sealed_activity_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sealedActivityHash() => r'90cee0963b85223661437a1ac9b08d2bb473eeb5';
+String _$sealedActivityHash() => r'421b709a18e7e28c101f67e0a422a70b9cc62afc';
 
 /// See also [SealedActivity].
 @ProviderFor(SealedActivity)

@@ -19,7 +19,7 @@ class EnumAsyncActivityState with _$EnumAsyncActivityState {
     // status
     required ActivityStatus status,
     // data
-    required Activity activity,
+    required List<Activity> activities,
     // error
     required String error,
   }) = _EnumAsyncActivityState;
@@ -27,7 +27,7 @@ class EnumAsyncActivityState with _$EnumAsyncActivityState {
   factory EnumAsyncActivityState.initial() {
     return EnumAsyncActivityState(
       status: ActivityStatus.loading,
-      activity: Activity.empty(),
+      activities: [Activity.empty()],
       error: '',
     );
   }

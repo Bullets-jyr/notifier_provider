@@ -59,11 +59,15 @@ class EnumAsyncActivity extends _$EnumAsyncActivity {
 
       final response = await ref.read(dioProvider).get('?type=$activityType');
 
-      final activity = Activity.fromJson(response.data);
+      final List activityList = response.data;
+
+      final activities = [
+        for (final activity in activityList) Activity.fromJson(activity),
+      ];
 
       state = state.copyWith(
         status: ActivityStatus.success,
-        activity: activity,
+        activities: activities,
       );
     } catch (e) {
       state = state.copyWith(

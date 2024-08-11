@@ -86,7 +86,7 @@ class _EnumActivityPageState extends ConsumerState<EnumActivityPage> {
         //     ),
         //   ),
         // ),
-        ActivityStatus.failure => activityState.activity == Activity.empty()
+        ActivityStatus.failure => activityState.activities.first == Activity.empty()
             ? const Center(
                 child: Text(
                   'Get some activity',
@@ -97,9 +97,9 @@ class _EnumActivityPageState extends ConsumerState<EnumActivityPage> {
                 ),
               )
             // 이전 엑티비티 데이터를 성공적으로 불러온 적이 있으면 엑티비티 위젯을 표시합니다.
-            : ActivityWidget(activity: activityState.activity),
+            : ActivityWidget(activity: activityState.activities.first),
         ActivityStatus.success => ActivityWidget(
-            activity: activityState.activity,
+            activity: activityState.activities.first,
           ),
       },
       floatingActionButton: FloatingActionButton.extended(

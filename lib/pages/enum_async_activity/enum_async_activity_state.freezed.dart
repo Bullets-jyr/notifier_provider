@@ -12,15 +12,18 @@ part of 'enum_async_activity_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$EnumAsyncActivityState {
-  ActivityStatus get status => throw _privateConstructorUsedError;
-  Activity get activity => throw _privateConstructorUsedError;
+// status
+  ActivityStatus get status => throw _privateConstructorUsedError; // data
+  List<Activity> get activities => throw _privateConstructorUsedError; // error
   String get error => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EnumAsyncActivityState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $EnumAsyncActivityStateCopyWith<EnumAsyncActivityState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -31,9 +34,7 @@ abstract class $EnumAsyncActivityStateCopyWith<$Res> {
           $Res Function(EnumAsyncActivityState) then) =
       _$EnumAsyncActivityStateCopyWithImpl<$Res, EnumAsyncActivityState>;
   @useResult
-  $Res call({ActivityStatus status, Activity activity, String error});
-
-  $ActivityCopyWith<$Res> get activity;
+  $Res call({ActivityStatus status, List<Activity> activities, String error});
 }
 
 /// @nodoc
@@ -47,11 +48,13 @@ class _$EnumAsyncActivityStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of EnumAsyncActivityState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? status = null,
-    Object? activity = null,
+    Object? activities = null,
     Object? error = null,
   }) {
     return _then(_value.copyWith(
@@ -59,23 +62,15 @@ class _$EnumAsyncActivityStateCopyWithImpl<$Res,
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ActivityStatus,
-      activity: null == activity
-          ? _value.activity
-          : activity // ignore: cast_nullable_to_non_nullable
-              as Activity,
+      activities: null == activities
+          ? _value.activities
+          : activities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ActivityCopyWith<$Res> get activity {
-    return $ActivityCopyWith<$Res>(_value.activity, (value) {
-      return _then(_value.copyWith(activity: value) as $Val);
-    });
   }
 }
 
@@ -88,10 +83,7 @@ abstract class _$$EnumAsyncActivityStateImplCopyWith<$Res>
       __$$EnumAsyncActivityStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ActivityStatus status, Activity activity, String error});
-
-  @override
-  $ActivityCopyWith<$Res> get activity;
+  $Res call({ActivityStatus status, List<Activity> activities, String error});
 }
 
 /// @nodoc
@@ -104,11 +96,13 @@ class __$$EnumAsyncActivityStateImplCopyWithImpl<$Res>
       $Res Function(_$EnumAsyncActivityStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EnumAsyncActivityState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? status = null,
-    Object? activity = null,
+    Object? activities = null,
     Object? error = null,
   }) {
     return _then(_$EnumAsyncActivityStateImpl(
@@ -116,10 +110,10 @@ class __$$EnumAsyncActivityStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ActivityStatus,
-      activity: null == activity
-          ? _value.activity
-          : activity // ignore: cast_nullable_to_non_nullable
-              as Activity,
+      activities: null == activities
+          ? _value._activities
+          : activities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -134,18 +128,31 @@ class _$EnumAsyncActivityStateImpl
     with DiagnosticableTreeMixin
     implements _EnumAsyncActivityState {
   const _$EnumAsyncActivityStateImpl(
-      {required this.status, required this.activity, required this.error});
+      {required this.status,
+      required final List<Activity> activities,
+      required this.error})
+      : _activities = activities;
 
+// status
   @override
   final ActivityStatus status;
+// data
+  final List<Activity> _activities;
+// data
   @override
-  final Activity activity;
+  List<Activity> get activities {
+    if (_activities is EqualUnmodifiableListView) return _activities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_activities);
+  }
+
+// error
   @override
   final String error;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'EnumAsyncActivityState(status: $status, activity: $activity, error: $error)';
+    return 'EnumAsyncActivityState(status: $status, activities: $activities, error: $error)';
   }
 
   @override
@@ -154,25 +161,28 @@ class _$EnumAsyncActivityStateImpl
     properties
       ..add(DiagnosticsProperty('type', 'EnumAsyncActivityState'))
       ..add(DiagnosticsProperty('status', status))
-      ..add(DiagnosticsProperty('activity', activity))
+      ..add(DiagnosticsProperty('activities', activities))
       ..add(DiagnosticsProperty('error', error));
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EnumAsyncActivityStateImpl &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.activity, activity) ||
-                other.activity == activity) &&
+            const DeepCollectionEquality()
+                .equals(other._activities, _activities) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, activity, error);
+  int get hashCode => Object.hash(runtimeType, status,
+      const DeepCollectionEquality().hash(_activities), error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EnumAsyncActivityState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EnumAsyncActivityStateImplCopyWith<_$EnumAsyncActivityStateImpl>
@@ -183,17 +193,21 @@ class _$EnumAsyncActivityStateImpl
 abstract class _EnumAsyncActivityState implements EnumAsyncActivityState {
   const factory _EnumAsyncActivityState(
       {required final ActivityStatus status,
-      required final Activity activity,
+      required final List<Activity> activities,
       required final String error}) = _$EnumAsyncActivityStateImpl;
 
+// status
   @override
-  ActivityStatus get status;
+  ActivityStatus get status; // data
   @override
-  Activity get activity;
+  List<Activity> get activities; // error
   @override
   String get error;
+
+  /// Create a copy of EnumAsyncActivityState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EnumAsyncActivityStateImplCopyWith<_$EnumAsyncActivityStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

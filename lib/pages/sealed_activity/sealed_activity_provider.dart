@@ -32,9 +32,13 @@ class SealedActivity extends _$SealedActivity {
 
       final response = await ref.read(dioProvider).get('?type=$activityType');
 
-      final activity = Activity.fromJson(response.data);
+      final List activityList = response.data;
 
-      state = SealedActivitySuccess(activity: activity);
+      final activities = [
+        for (final activity in activityList) Activity.fromJson(activity),
+      ];
+
+      state = SealedActivitySuccess(activities: activities);
     } catch (e) {
       state = SealedActivityFailure(error: e.toString());
     }

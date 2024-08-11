@@ -12,13 +12,13 @@ final class SealedAsyncActivityLoading extends SealedAsyncActivityState {
 }
 
 final class SealedAsyncActivitySuccess extends SealedAsyncActivityState {
-  final Activity activity;
+  final List<Activity> activities;
   const SealedAsyncActivitySuccess({
-    required this.activity,
+    required this.activities,
   });
 
   @override
-  String toString() => 'SealedAsyncActivitySuccess(activity: $activity)';
+  String toString() => 'SealedAsyncActivitySuccess(activities: $activities)';
 }
 
 final class SealedAsyncActivityFailure extends SealedAsyncActivityState {

@@ -23,7 +23,7 @@ class _SealedAsyncActivityPageState
   Widget build(BuildContext context) {
     ref.listen<SealedAsyncActivityState>(
       sealedAsyncActivityProvider,
-          (previous, next) {
+      (previous, next) {
         switch (next) {
           case SealedAsyncActivityFailure(error: String error):
             showDialog(
@@ -55,23 +55,23 @@ class _SealedAsyncActivityPageState
       ),
       body: switch (activityState) {
         SealedAsyncActivityLoading() => const Center(
-          child: CircularProgressIndicator(),
-        ),
+            child: CircularProgressIndicator(),
+          ),
         SealedAsyncActivityFailure() => prevWidget == null
             ? const Center(
-          child: Text(
-            'Get some activity',
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.red,
-            ),
-          ),
-        )
+                child: Text(
+                  'Get some activity',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.red,
+                  ),
+                ),
+              )
             : prevWidget!,
-        SealedAsyncActivitySuccess(activity: Activity activity) => prevWidget =
-            ActivityWidget(
-              activity: activity,
-            ),
+        SealedAsyncActivitySuccess(activities: List<Activity> activities) =>
+          prevWidget = ActivityWidget(
+            activity: activities.first,
+          ),
       },
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {

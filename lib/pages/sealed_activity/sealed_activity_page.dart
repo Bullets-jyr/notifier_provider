@@ -33,6 +33,8 @@ class _SealedActivityPageState extends ConsumerState<SealedActivityPage> {
       (previous, next) {
         // break를 처리하지 않아도 됩니다.
         // enhanced switch statement + pattern matching
+        // enhanced switch statement: case 처리 후 break를 넣을 필요가 없습니다.
+        // 특정 case를 처리하면 break를 하지 않아도 break가 됩니다.
         switch (next) {
           // 맞으면 SealedActivityFailure의 error property의 값을 String error에 저장합니다.
           case SealedActivityFailure(error: String error):
@@ -85,15 +87,17 @@ class _SealedActivityPageState extends ConsumerState<SealedActivityPage> {
                 ),
               )
             : prevWidget!,
-        SealedActivitySuccess(activity: Activity activity) => prevWidget =
-              ActivityWidget(
-            activity: activity,
+        SealedActivitySuccess(activities: List<Activity> activities) =>
+          prevWidget = ActivityWidget(
+            activity: activities.first,
           ),
       },
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           final randomNumber = Random().nextInt(activityTypes.length);
-          ref.read(sealedActivityProvider.notifier).fetchActivity(activityTypes[randomNumber]);
+          ref
+              .read(sealedActivityProvider.notifier)
+              .fetchActivity(activityTypes[randomNumber]);
         },
         label: Text(
           'New Activity',

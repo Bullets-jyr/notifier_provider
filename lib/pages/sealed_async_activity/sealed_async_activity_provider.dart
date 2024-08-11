@@ -38,9 +38,13 @@ class SealedAsyncActivity extends _$SealedAsyncActivity {
 
       final response = await ref.read(dioProvider).get('?type=$activityType');
 
-      final activity = Activity.fromJson(response.data);
+      final List activityList = response.data;
 
-      state = SealedAsyncActivitySuccess(activity: activity);
+      final activities = [
+        for (final activity in activityList) Activity.fromJson(activity),
+      ];
+
+      state = SealedAsyncActivitySuccess(activities: activities);
     } catch (e) {
       state = SealedAsyncActivityFailure(error: e.toString());
     }

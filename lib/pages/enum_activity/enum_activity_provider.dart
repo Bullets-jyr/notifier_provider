@@ -20,6 +20,7 @@ class MyCounter extends _$MyCounter {
 class EnumActivity extends _$EnumActivity {
   int _errorCounter = 0;
 
+  // ref.invalidate(enumActivityProvider);
   // Notifier의 build 메소드는 다시 실행이 되지만 Notifier는 dispose되지 않습니다.
   @override
   EnumActivityState build() {
@@ -44,11 +45,17 @@ class EnumActivity extends _$EnumActivity {
 
       final response = await ref.read(dioProvider).get('?type=$activityType');
 
-      final activity = Activity.fromJson(response.data);
+      // throw 'Fail to fetch activity';
+
+      final List activityList = response.data;
+
+      final activities = [
+        for (final activity in activityList) Activity.fromJson(activity),
+      ];
 
       state = state.copyWith(
         status: ActivityStatus.success,
-        activity: activity,
+        activities: activities,
       );
     } catch (e) {
       state = state.copyWith(
